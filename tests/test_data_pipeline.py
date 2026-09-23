@@ -17,6 +17,8 @@ from src.data_generator import (
 )
 from src.data_loader import load_dataset
 from src.data_processor import prepare_search_data, validate_dataset
+from src.linear_search import linear_search
+from src.binary_search import binary_search
 
 
 class GenerationTests(unittest.TestCase):
@@ -165,6 +167,28 @@ class CsvPipelineTests(unittest.TestCase):
                 redirect_stdout(io.StringIO()):
             self.assertEqual(main.main(), 1)
         self.assertIn("--generate", errors.getvalue())
+
+    def test_searches_use_original_and_sorted_data_at_all_required_sizes(self):
+        paths = generate_required_datasets(self.directory)
+        for size, path in zip(DATASET_SIZES, paths):
+            with self.subTest(size=size):
+                loaded = load_dataset(path, expected_size=size)
+                before = loaded.copy()
+                original, ordered = prepare_search_data(loaded, expected_size=size)
+                for target in (original[0], original[size // 2], original[-1], -1):
+                    with self.subTest(target=target):
+                        linear_index = linear_search(original, target)
+                        binary_index = binary_search(ordered, target)
+                        if target == -1:  # Generated values are nonnegative.
+                            self.assertEqual((linear_index, binary_index), (-1, -1))
+                        else:
+                            self.assertGreaterEqual(linear_index, 0)
+                            self.assertGreaterEqual(binary_index, 0)
+                            self.assertEqual(original[linear_index], target)
+                            self.assertEqual(ordered[binary_index], target)
+                self.assertEqual(loaded, before)
+                self.assertEqual(original, before)
+                self.assertEqual(ordered, sorted(before))
 
     def test_entry_point_generates_and_validates(self):
         output = io.StringIO()
