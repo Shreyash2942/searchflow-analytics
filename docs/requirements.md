@@ -7,10 +7,10 @@ Those source documents live in the parent portfolio workspace. The planned
 release is `v1.0.0`; requirements below describe future acceptance, not current
 feature completion. Repository name: `searchflow-analytics`.
 
-Current implementation: Days 1–2 are complete. FR-01, FR-09 (including friendly
-entry-point error reporting), and FR-10 are implemented and tested. Search,
-timing, benchmark output, interactive search selection, and written analysis
-remain future work. See [Day 2 evidence](day_2_checklist.md).
+Current implementation: Days 1–3 are complete. FR-01, FR-02, FR-03, FR-09
+(including friendly entry-point error reporting), and FR-10 are implemented
+and tested. Timing, benchmark output, interactive search selection, and written
+analysis remain future work. See [Day 3 evidence](day_3_checklist.md).
 
 ## Functional requirements
 
@@ -93,8 +93,22 @@ Day 2 data contract (implemented):
 - `main.py` reports expected file/data errors and exits with status 1. Normal
   execution only reads files; `--generate` explicitly replaces the required CSVs.
 
+Day 3 search contract (implemented):
+
+- Both functions accept integer sequences and integer targets, returning a
+  zero-based matching index or `-1`. Empty sequences return `-1` at the
+  algorithm level, while the data pipeline still rejects empty CSV datasets.
+- Linear search examines elements sequentially and returns the first match.
+  Binary search narrows midpoint bounds on ascending input and returns any
+  match. Duplicate results need not identify the same occurrence or index.
+- Binary search expects already validated, sorted input. Use the sorted copy
+  from `prepare_search_data`; an internal sorting/validation pass would add
+  work beyond the logarithmic search itself.
+- Neither function mutates input, performs file I/O, prints, or measures time.
+- Standard Python lists/tuples supply constant-time indexing for the stated
+  binary-search complexity. Both implementations use constant auxiliary space.
+
 Resolve before the remaining features are built:
 
-- Day 3: whether duplicates return any matching index or the first match.
 - Day 4: target cases, repetition count, timing units, summary statistic,
   and how separately measured sorting costs will be reported.

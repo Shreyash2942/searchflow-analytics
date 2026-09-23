@@ -1,9 +1,10 @@
 # Initial pipeline architecture
 
-Status: initial Version 1 design with Day 2 implementation updates. Dataset
-generation, loading, validation, and preparation are implemented. `main.py`
-runs those stages; search, timing, result collection, and the interactive
-search menu remain planned. The PNG shows the full target architecture.
+Status: initial Version 1 design with Day 3 implementation updates. Dataset
+generation, loading, validation, preparation, and both search functions are
+implemented. `main.py` runs data preparation; searches are available as
+reusable functions. Timing, result collection, and the interactive search
+menu remain planned. The PNG shows the full target architecture.
 
 ![Planned pipeline](../diagrams/pipeline_architecture.png)
 
@@ -46,8 +47,8 @@ versus repeated searches.
 | `src/data_generator.py` | Size and documented generation settings | Integer data and required stored CSV datasets | 2 delivered |
 | `src/data_loader.py` | CSV path and optional expected size | Validated integer list or a clear loading failure | 2 delivered |
 | `src/data_processor.py` | Loaded list and optional expected size | Validated original-order list and independently sorted copy | 2 delivered |
-| `src/linear_search.py` | Original-order list and target | Matching index or `-1` | 3 |
-| `src/binary_search.py` | Sorted list and target | Matching index or `-1` | 3 |
+| `src/linear_search.py` | Original-order list and target | First matching index or `-1` | 3 delivered |
+| `src/binary_search.py` | Ascending sorted list and target | Any matching index or `-1` | 3 delivered |
 | `src/performance_timer.py` | Search function, input, target, repetition settings | Search result and measured time | 4 |
 | `src/results_manager.py` | Benchmark records | CSV headers and rows in `results/` | 4 |
 
@@ -62,7 +63,13 @@ versus repeated searches.
 - An index belongs to the particular input list. Linear and binary search
   can find the same value at different indexes because their list order differs.
 - Algorithm-level empty-list behavior is distinct from rejecting empty CSV
-  datasets at the pipeline boundary.
+  datasets at the pipeline boundary: both searches return `-1` for empty input.
+- Validation and sorting stay outside the search functions. The pipeline
+  integration test passes the original-order list to linear search and the
+  sorted copy to binary search for all three required sizes. Binary search
+  does not detect unsorted input at runtime; sorted order is a precondition.
+- Linear search returns the first duplicate; binary search may return any
+  matching duplicate. Neither function modifies its input.
 - Storage and terminal output stay outside the search functions and timed
   region. Use project-relative locations rather than machine-specific paths.
 - CSV records have `algorithm,dataset_size,target,found,index,execution_time`.

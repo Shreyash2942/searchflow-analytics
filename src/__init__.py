@@ -1,1 +1,1 @@
-"""SearchFlow Analytics dataset generation, loading, and preprocessing package."""
+"""SearchFlow Analytics data preparation and linear/binary search algorithms."""

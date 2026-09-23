@@ -35,7 +35,7 @@ def main() -> int:
             print("Run with --generate to create the required datasets.", file=sys.stderr)
         return 1
 
-    print("Day 2 data pipeline is ready. Search algorithms and timing follow on Days 3 and 4.")
+    print("Data pipeline ready. Search functions are available; timing follows on Day 4.")
     return 0
 
 
