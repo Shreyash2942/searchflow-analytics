@@ -1,0 +1,4 @@
+# Keep the bytes used by benchmark provenance hashes stable across platforms.
+*.py text eol=lf
+*.csv text eol=lf
+*.json text eol=lf

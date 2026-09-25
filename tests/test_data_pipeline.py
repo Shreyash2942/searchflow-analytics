@@ -93,6 +93,7 @@ class CsvPipelineTests(unittest.TestCase):
     def test_round_trip_and_parent_creation(self):
         destination = self.directory / "nested" / "dataset.csv"
         save_dataset([9, -4, 9, 0], destination)
+        self.assertNotIn(b"\r", destination.read_bytes())
         self.assertEqual(destination.read_text().splitlines()[0], "value")
         self.assertEqual(load_dataset(destination, expected_size=4), [9, -4, 9, 0])
 

@@ -49,7 +49,7 @@ def save_dataset(data: Sequence[int], path: str | Path) -> Path:
     destination = Path(path)
     destination.parent.mkdir(parents=True, exist_ok=True)
     with destination.open("w", encoding="utf-8", newline="") as stream:
-        writer = csv.writer(stream)
+        writer = csv.writer(stream, lineterminator="\n")
         writer.writerow(["value"])
         writer.writerows((value,) for value in data)
     return destination
