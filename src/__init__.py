@@ -1,1 +1,1 @@
-"""SearchFlow Analytics data preparation and linear/binary search algorithms."""
+"""SearchFlow Analytics data preparation, search algorithms, and benchmarking."""
