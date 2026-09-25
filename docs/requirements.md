@@ -7,11 +7,12 @@ Those source documents live in the parent portfolio workspace. The planned
 release is `v1.0.0`; requirements below describe future acceptance, not current
 feature completion. Repository name: `searchflow-analytics`.
 
-Current implementation: Days 1–4 are complete. Data preparation, both searches,
+Current implementation: Days 1–5 are complete. Data preparation, both searches,
 timing (FR-05), benchmark CSV output (FR-07), and measured comparisons at all
 required sizes (the measurement portion of FR-08) are implemented and tested.
-Interactive search selection and final written analysis remain future work.
-See [Day 4 evidence](day_4_checklist.md).
+Interactive search selection (FR-04) and found/index/time display (FR-06) are
+also implemented. Final written analysis remains future work.
+See [Day 5 evidence](day_5_checklist.md).
 
 ## Functional requirements
 
@@ -91,8 +92,9 @@ Day 2 data contract (implemented):
   retain their `OSError` subtype, including `FileNotFoundError`.
 - Validator rejects booleans, fractions, strings, empty data, and incorrect
   expected counts. Original-order and sorted outputs are separate copies.
-- `main.py` reports expected file/data errors and exits with status 1. Normal
-  execution only reads files; `--generate` explicitly replaces the required CSVs.
+- Batch commands report expected file/data errors and exit with status 1.
+  Interactive searches report errors and return to the menu. Ordinary searches
+  only read files; `--generate` explicitly replaces the required CSVs.
 
 Day 3 search contract (implemented):
 
@@ -128,5 +130,24 @@ Day 4 benchmark contract (implemented):
   before export. Reruns produce new actual timings, not identical timing values.
 
 The complete methodology and interpretation limits are in
-[benchmark_methodology.md](benchmark_methodology.md). Day 5 adds interactive
-search selection; Day 6 develops the required analysis and recommendations.
+[benchmark_methodology.md](benchmark_methodology.md). Day 6 develops the
+required analysis and recommendations.
+
+Day 5 interaction contract (implemented):
+
+- No-argument `main.py` or `--interactive` opens the menu. Select one of the
+  three dataset sizes, enter an integer target, and select linear/binary/both.
+- Invalid options and noninteger targets re-prompt. Zero and negative targets
+  are accepted; no Python expression is evaluated as input.
+- Each search loads and validates the chosen file, prepares independent
+  original/sorted lists, and uses the existing timer defaults. Loading/sorting
+  remain outside the displayed search timing.
+- Display algorithm, found status, list-relative zero-based index (or `-1`),
+  and seconds/search. Identify original-order versus sorted indexes.
+- Repeat through the dataset menu; `q` at every prompt, EOF, and Ctrl+C exit
+  cleanly with status 0. File/content errors report clearly and allow another choice.
+- Interactive searches do not write files. `--preview` preserves the old
+  non-interactive preview; `--generate` alone regenerates/previews; explicit
+  `--generate --interactive` and `--generate --benchmark` select the follow-up.
+- Action flags are mutually exclusive. Benchmark timing options still require
+  `--benchmark`, and invalid timing counts are rejected before generation.

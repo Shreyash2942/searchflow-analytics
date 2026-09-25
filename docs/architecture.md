@@ -1,10 +1,10 @@
 # Initial pipeline architecture
 
-Status: initial Version 1 design with Day 4 implementation updates. Data
-preparation, both search functions, timing, and benchmark output are implemented.
-`main.py --benchmark` coordinates measured searches and export through
-`src/benchmark.py`. The interactive search menu and final written analysis
-remain planned. The PNG shows the full target architecture.
+Status: initial Version 1 design with Day 5 implementation updates. Data
+preparation, searches, timing, benchmark output, and the interactive menu are
+implemented. `main.py` routes menu sessions to `src/cli.py` and full benchmark
+runs to `src/benchmark.py`. Final written analysis remains planned.
+The PNG shows the full target architecture.
 
 ![Planned pipeline](../diagrams/pipeline_architecture.png)
 
@@ -39,11 +39,17 @@ search completes, and it excludes data generation/loading, sorting, display,
 and CSV writes. Analyze sorting cost separately when discussing one-time
 versus repeated searches.
 
+Interactive searches branch directly from measured results to terminal display;
+they do not export CSVs. `--benchmark` follows the full CSV/metadata export branch.
+Each menu search reloads the selected CSV, so file corrections are visible on
+the next attempt. Input errors re-prompt; file/data errors return to the menu.
+
 ## Module responsibilities
 
 | Module | Input | Output / responsibility | Day |
 | --- | --- | --- | --- |
-| `main.py` | Generation/benchmark flags and timing settings; search selections later | Preview data or run benchmarks and display results; handle errors | 2/4 delivered; 5 planned |
+| `main.py` | Action/generation flags and benchmark timing settings | Default interactive search; explicit preview/generation/benchmark routing | 5 delivered |
+| `src/cli.py` | Dataset-size option, integer target, search mode | Load/prepare/time selected searches, display measured records, recover input/file errors, handle quit/EOF/Ctrl+C | 5 delivered |
 | `src/data_generator.py` | Size and documented generation settings | Integer data and required stored CSV datasets | 2 delivered |
 | `src/data_loader.py` | CSV path and optional expected size | Validated integer list or a clear loading failure | 2 delivered |
 | `src/data_processor.py` | Loaded list and optional expected size | Validated original-order list and independently sorted copy | 2 delivered |

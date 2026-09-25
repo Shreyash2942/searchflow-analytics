@@ -5,9 +5,10 @@ CSV data-processing pipeline. The planned Version 1 release is `v1.0.0`.
 
 ## Current status
 
-Days 1–4 are complete: data preparation, linear/binary search, high-resolution
-timing, and measured benchmark CSV output with run metadata. `main.py` prepares
-datasets or runs benchmarks. Interactive search selection follows on Day 5.
+Days 1–5 are complete: data preparation, linear/binary search, measured
+benchmarks, and an interactive search menu. `main.py` opens the menu by default;
+batch commands support previewing, generation, and benchmark export. Final
+analysis and submission documentation remain Days 6–7 work.
 
 ## Objectives
 
@@ -18,7 +19,7 @@ datasets or runs benchmarks. Interactive search selection follows on Day 5.
 
 ## Setup
 
-Use Python 3.10 or newer. Days 1–4 were verified locally with Python 3.14.4.
+Use Python 3.10 or newer. Days 1–5 were verified locally with Python 3.14.4.
 Run these commands from the repository root in PowerShell:
 
 ```powershell
@@ -31,19 +32,33 @@ Calling the environment's interpreter directly does not require activation or
 changes to PowerShell's execution policy. On macOS/Linux, use
 `.venv/bin/python` after creating the environment with `python3 -m venv .venv`.
 
-The three datasets are already included. Running `main.py` loads and validates
-them without changing the files, then previews original and sorted values.
-It works from another working directory as well because the data directory is
-resolved relative to the project source.
-
-Example output (previews omitted here):
+The three datasets are already included. The menu prompts for a dataset size,
+integer target, and linear search, binary search, or both:
 
 ```text
-SearchFlow Analytics
-dataset_100.csv: 100 integers validated; sorted copy ready.
-dataset_1000.csv: 1,000 integers validated; sorted copy ready.
-dataset_10000.csv: 10,000 integers validated; sorted copy ready.
-Data pipeline ready. Use --benchmark to measure both search algorithms.
+Select Dataset Size
+1. 100
+2. 1,000
+3. 10,000
+Enter option (q to quit):
+```
+
+For a quick example, choose `1`, enter `83810`, then choose `3` to compare both.
+The included 100-value dataset returns linear index `0` and binary index `82`;
+indexes refer to original-order and sorted data respectively. Times are measured
+live and vary between runs. Each result shows found status, index, and seconds
+per search. The next dataset menu starts another search.
+
+Enter `q` at any prompt to exit. Blank/invalid choices and noninteger targets
+are re-prompted; zero and negative integer targets are valid. EOF or Ctrl+C
+ends the session cleanly. File/data errors return to the dataset menu, allowing
+another selection. Interactive searches display results without changing datasets
+or overwriting saved benchmark files.
+
+To use the previous non-interactive data preview:
+
+```powershell
+.\.venv\Scripts\python.exe main.py --preview
 ```
 
 To regenerate all three CSV files with seed `42`, replacing their current contents:
@@ -52,7 +67,14 @@ To regenerate all three CSV files with seed `42`, replacing their current conten
 .\.venv\Scripts\python.exe main.py --generate
 ```
 
-Missing files and invalid data produce an error message and a nonzero exit code.
+`--generate` alone regenerates and previews without prompting. Combine it with
+`--interactive` to open the menu afterward, or `--benchmark` to measure afterward.
+The explicit action flags `--interactive`, `--preview`, and `--benchmark` are
+mutually exclusive. Resource paths are based on the project location, so commands
+also work when launched from another directory.
+
+Batch file/data errors return a nonzero exit code. Interactive file errors
+allow recovery within the menu; `q`, EOF, and Ctrl+C exit the session with status 0.
 See [dataset format and reproducibility](data/README.md) for the data contract.
 
 The application and tests use the Python standard library (`csv`,
@@ -76,8 +98,9 @@ and the median batch average in **seconds per search**. Customize with:
 ```
 
 `--generate --benchmark` regenerates the seeded datasets before measuring.
-Timing options require `--benchmark`. Normal execution without either flag
-only reads and previews the data.
+Timing options require `--benchmark`; the interactive menu uses the documented
+default settings. Invalid benchmark settings are rejected before regeneration
+or measurement begins.
 
 - [performance_results.csv](results/performance_results.csv): the required
   `algorithm,dataset_size,target,found,index,execution_time` columns.
@@ -125,15 +148,16 @@ cost is separate from the search complexities above.
 
 ![Planned pipeline architecture](diagrams/pipeline_architecture.png)
 
-The CLI will coordinate generation/loading, validation, an unsorted and sorted
-branch, timed searches, CSV results, and user display. Written analysis will use
-the measured results. See [architecture and contracts](docs/architecture.md).
+The CLI coordinates loading, validation, the original/sorted branches, timed
+searches, and result display. Full benchmark runs also export CSV and metadata.
+Written analysis will use the measured results. See
+[architecture and contracts](docs/architecture.md).
 
 ## Repository structure
 
 ```text
 searchflow-analytics/
-|-- main.py                  # Preparation/benchmark commands; search menu on Day 5
+|-- main.py                  # Interactive menu and batch command routing
 |-- requirements.txt         # Runtime dependencies
 |-- .gitignore
 |-- src/
@@ -145,7 +169,8 @@ searchflow-analytics/
 |   |-- binary_search.py
 |   |-- performance_timer.py
 |   |-- results_manager.py
-|   `-- benchmark.py
+|   |-- benchmark.py
+|   `-- cli.py
 |-- data/                   # README and generated 100/1,000/10,000-value CSV files
 |-- results/                # Measured benchmark CSV and run metadata
 |-- tests/
@@ -154,7 +179,8 @@ searchflow-analytics/
 |   |-- test_binary_search.py
 |   |-- test_performance_timer.py
 |   |-- test_results_manager.py
-|   `-- test_benchmark.py
+|   |-- test_benchmark.py
+|   `-- test_cli.py
 |-- docs/
 |   |-- requirements.md
 |   |-- architecture.md
@@ -162,6 +188,7 @@ searchflow-analytics/
 |   |-- day_2_checklist.md
 |   |-- day_3_checklist.md
 |   |-- day_4_checklist.md
+|   |-- day_5_checklist.md
 |   |-- benchmark_methodology.md
 |   `-- screenshots/         # Working application captures on Day 7
 `-- diagrams/
@@ -180,9 +207,11 @@ Run the data pipeline and search tests from the repository root:
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-All 56 tests pass. Coverage includes data preparation, search correctness,
+All 73 tests pass. Coverage includes data preparation, search correctness,
 binary-search work bounds, timing arithmetic and boundaries, CSV validation,
-benchmark metadata, all required sizes, and entry-point errors. Controlled
+benchmark metadata, all required sizes, and interactive input/recovery/exit
+behavior. The menu is also checked through a real piped terminal session from
+the parent directory, with dataset/result files unchanged. Controlled
 clocks are used only in timer unit tests; published benchmark values come from
 actual calls to `time.perf_counter()`.
 
@@ -194,14 +223,14 @@ actual calls to `time.perf_counter()`.
 | 2 — complete | Dataset generation, loading, validation, sorted copies |
 | 3 — complete | Linear and binary search |
 | 4 — complete | Timing and benchmark CSV |
-| 5 | Interactive CLI and integration |
+| 5 — complete | Interactive CLI and integration |
 | 6 | Complete tests, Big O analysis, recommendation guide |
 | 7 | Final validation, screenshots, README, `v1.0.0` release |
 
 See [Version 1 requirements](docs/requirements.md) and the
-[Day 4 quality gate](docs/day_4_checklist.md). The
+[Day 5 quality gate](docs/day_5_checklist.md). The
 [Day 1](docs/day_1_checklist.md), [Day 2](docs/day_2_checklist.md), and
-[Day 3](docs/day_3_checklist.md) quality gates
+[Day 3](docs/day_3_checklist.md), and [Day 4](docs/day_4_checklist.md) quality gates
 are retained as historical records.
 This version stays local:
 cloud deployment, databases, APIs, containers, orchestration, CI/CD,
