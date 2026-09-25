@@ -1,0 +1,462 @@
+{
+  "started_at_utc": "2026-09-24T23:59:42.713375+00:00",
+  "python": "3.14.4 (tags/v3.14.4:23116f9, Apr  7 2026, 14:10:54) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "timer": "time.perf_counter",
+  "units": "seconds per search",
+  "statistic": "median of batch means",
+  "repeats": 7,
+  "iterations_per_batch": 100,
+  "warmup_calls": 3,
+  "untimed_correctness_calls": 1,
+  "clock_resolution_seconds": 1e-07,
+  "clock_implementation": "QueryPerformanceCounter()",
+  "timing_scope": "search calls plus Python loop/call overhead; excludes preprocessing and output",
+  "algorithm_order": "alternates by dataset index plus case index",
+  "datasets": [
+    {
+      "file": "dataset_100.csv",
+      "size": 100,
+      "sha256": "5356c112a75aed0a0bb113d8e70ed05a21c8a58d788f3eabb1b3c5a9b96ed233",
+      "sort_seconds": 1.200009137392044e-06,
+      "sort_samples_seconds": [
+        2.700020559132099e-06,
+        1.9000144675374031e-06,
+        1.200009137392044e-06,
+        1.100008375942707e-06,
+        1.300009898841381e-06,
+        1.100008375942707e-06,
+        1.100008375942707e-06
+      ]
+    },
+    {
+      "file": "dataset_1000.csv",
+      "size": 1000,
+      "sha256": "d47eacffeb41330254e8077417962ec625b8030c43109a533fc8b3e641334630",
+      "sort_seconds": 2.6499968953430653e-05,
+      "sort_samples_seconds": [
+        5.059991963207722e-05,
+        3.330002073198557e-05,
+        2.9499991796910763e-05,
+        2.6499968953430653e-05,
+        2.3999949917197227e-05,
+        2.3900065571069717e-05,
+        2.4099950678646564e-05
+      ]
+    },
+    {
+      "file": "dataset_10000.csv",
+      "size": 10000,
+      "sha256": "281b5b9d863e32fd7fec5bb102f3434a7e4c8b56c944ae30961374a369cc1aa0",
+      "sort_seconds": 0.0007409999379888177,
+      "sort_samples_seconds": [
+        0.0007333999965339899,
+        0.0007409999379888177,
+        0.0006913000252097845,
+        0.0006935000419616699,
+        0.0008347999537363648,
+        0.0012777999509125948,
+        0.0012555000139400363
+      ]
+    }
+  ],
+  "measurements": [
+    {
+      "csv_row": 1,
+      "case": "original_first",
+      "algorithm": "Linear",
+      "dataset_size": 100,
+      "target": 83810,
+      "batch_seconds_per_search": [
+        8.300063200294972e-08,
+        7.899943739175797e-08,
+        7.800059393048286e-08,
+        7.699942216277122e-08,
+        7.700058631598949e-08,
+        7.700058631598949e-08,
+        7.699942216277122e-08
+      ]
+    },
+    {
+      "csv_row": 2,
+      "case": "original_first",
+      "algorithm": "Binary",
+      "dataset_size": 100,
+      "target": 83810,
+      "batch_seconds_per_search": [
+        3.200001083314419e-07,
+        3.160000778734684e-07,
+        3.160000778734684e-07,
+        3.160000778734684e-07,
+        3.15000070258975e-07,
+        3.159989137202501e-07,
+        3.15000070258975e-07
+      ]
+    },
+    {
+      "csv_row": 3,
+      "case": "original_middle",
+      "algorithm": "Binary",
+      "dataset_size": 100,
+      "target": 45082,
+      "batch_seconds_per_search": [
+        3.170000854879618e-07,
+        3.170000854879618e-07,
+        3.160000778734684e-07,
+        3.169989213347435e-07,
+        3.220001235604286e-07,
+        3.460003063082695e-07,
+        3.9799953810870647e-07
+      ]
+    },
+    {
+      "csv_row": 4,
+      "case": "original_middle",
+      "algorithm": "Linear",
+      "dataset_size": 100,
+      "target": 45082,
+      "batch_seconds_per_search": [
+        1.0549998842179774e-06,
+        1.0459998156875372e-06,
+        1.164000714197755e-06,
+        1.0400009341537953e-06,
+        1.0389997623860837e-06,
+        1.0379997547715903e-06,
+        1.2089998926967382e-06
+      ]
+    },
+    {
+      "csv_row": 5,
+      "case": "original_last",
+      "algorithm": "Linear",
+      "dataset_size": 100,
+      "target": 49735,
+      "batch_seconds_per_search": [
+        2.24500079639256e-06,
+        1.7529993783682584e-06,
+        2.6510003954172132e-06,
+        2.6789994444698096e-06,
+        1.7350004054605962e-06,
+        1.7969997134059668e-06,
+        1.7300003673881293e-06
+      ]
+    },
+    {
+      "csv_row": 6,
+      "case": "original_last",
+      "algorithm": "Binary",
+      "dataset_size": 100,
+      "target": 49735,
+      "batch_seconds_per_search": [
+        2.059992402791977e-07,
+        2.010003663599491e-07,
+        2.010003663599491e-07,
+        2.0099920220673084e-07,
+        2.010003663599491e-07,
+        2.010003663599491e-07,
+        1.9000028260052203e-07
+      ]
+    },
+    {
+      "csv_row": 7,
+      "case": "missing_above_max",
+      "algorithm": "Binary",
+      "dataset_size": 100,
+      "target": 99459,
+      "batch_seconds_per_search": [
+        3.2100011594593524e-07,
+        3.2100011594593524e-07,
+        3.200001083314419e-07,
+        3.2100011594593524e-07,
+        3.199989441782236e-07,
+        3.730005118995905e-07,
+        3.2900017686188223e-07
+      ]
+    },
+    {
+      "csv_row": 8,
+      "case": "missing_above_max",
+      "algorithm": "Linear",
+      "dataset_size": 100,
+      "target": 99459,
+      "batch_seconds_per_search": [
+        1.5340000391006469e-06,
+        1.5320000238716603e-06,
+        1.531000016257167e-06,
+        1.5320000238716603e-06,
+        1.5320000238716603e-06,
+        1.5330000314861537e-06,
+        2.0329991821199658e-06
+      ]
+    },
+    {
+      "csv_row": 9,
+      "case": "original_first",
+      "algorithm": "Binary",
+      "dataset_size": 1000,
+      "target": 83810,
+      "batch_seconds_per_search": [
+        6.689992733299732e-07,
+        1.490999711677432e-06,
+        6.780005060136318e-07,
+        7.109995931386947e-07,
+        6.740004755556583e-07,
+        6.480002775788307e-07,
+        6.579991895705462e-07
+      ]
+    },
+    {
+      "csv_row": 10,
+      "case": "original_first",
+      "algorithm": "Linear",
+      "dataset_size": 1000,
+      "target": 83810,
+      "batch_seconds_per_search": [
+        1.2699980288743974e-07,
+        1.1299969628453254e-07,
+        1.1600088328123093e-07,
+        1.1499971151351929e-07,
+        1.1599971912801265e-07,
+        1.0399962775409222e-07,
+        1.0600080713629722e-07
+      ]
+    },
+    {
+      "csv_row": 11,
+      "case": "original_middle",
+      "algorithm": "Linear",
+      "dataset_size": 1000,
+      "target": 96542,
+      "batch_seconds_per_search": [
+        9.973999112844467e-06,
+        8.411000017076731e-06,
+        8.291000267490744e-06,
+        8.27800016850233e-06,
+        8.243999909609556e-06,
+        8.27800016850233e-06,
+        8.299000328406691e-06
+      ]
+    },
+    {
+      "csv_row": 12,
+      "case": "original_middle",
+      "algorithm": "Binary",
+      "dataset_size": 1000,
+      "target": 96542,
+      "batch_seconds_per_search": [
+        5.289993714541196e-07,
+        5.240004975348711e-07,
+        5.230004899203777e-07,
+        5.21999318152666e-07,
+        5.230004899203777e-07,
+        5.229993257671594e-07,
+        5.230004899203777e-07
+      ]
+    },
+    {
+      "csv_row": 13,
+      "case": "original_last",
+      "algorithm": "Binary",
+      "dataset_size": 1000,
+      "target": 62746,
+      "batch_seconds_per_search": [
+        5.580007564276456e-07,
+        4.650000482797623e-07,
+        4.660000558942556e-07,
+        4.650000482797623e-07,
+        4.650000482797623e-07,
+        4.650000482797623e-07,
+        4.64998884126544e-07
+      ]
+    },
+    {
+      "csv_row": 14,
+      "case": "original_last",
+      "algorithm": "Linear",
+      "dataset_size": 1000,
+      "target": 62746,
+      "batch_seconds_per_search": [
+        2.062099985778332e-05,
+        2.2046000231057407e-05,
+        2.045899978838861e-05,
+        2.0830000285059213e-05,
+        1.9466999219730496e-05,
+        1.9644000567495822e-05,
+        1.9492999417707324e-05
+      ]
+    },
+    {
+      "csv_row": 15,
+      "case": "missing_above_max",
+      "algorithm": "Linear",
+      "dataset_size": 1000,
+      "target": 99944,
+      "batch_seconds_per_search": [
+        1.754100085236132e-05,
+        1.76139990799129e-05,
+        1.7587000038474797e-05,
+        1.812600065022707e-05,
+        1.8091999227181077e-05,
+        1.752000069245696e-05,
+        1.7555999802425505e-05
+      ]
+    },
+    {
+      "csv_row": 16,
+      "case": "missing_above_max",
+      "algorithm": "Binary",
+      "dataset_size": 1000,
+      "target": 99944,
+      "batch_seconds_per_search": [
+        5.249993409961462e-07,
+        5.110003985464573e-07,
+        5.120004061609507e-07,
+        5.10999234393239e-07,
+        5.120004061609507e-07,
+        5.120004061609507e-07,
+        5.349994171410799e-07
+      ]
+    },
+    {
+      "csv_row": 17,
+      "case": "original_first",
+      "algorithm": "Linear",
+      "dataset_size": 10000,
+      "target": 83810,
+      "batch_seconds_per_search": [
+        1.3199984095990657e-07,
+        1.1899974197149277e-07,
+        1.179997343569994e-07,
+        1.9400031305849553e-07,
+        1.5700003132224082e-07,
+        1.1699972674250603e-07,
+        1.1699972674250603e-07
+      ]
+    },
+    {
+      "csv_row": 18,
+      "case": "original_first",
+      "algorithm": "Binary",
+      "dataset_size": 10000,
+      "target": 83810,
+      "batch_seconds_per_search": [
+        8.700008038431406e-07,
+        9.649991989135743e-07,
+        8.640007581561804e-07,
+        8.619995787739754e-07,
+        8.619995787739754e-07,
+        8.620007429271936e-07,
+        1.1179991997778417e-06
+      ]
+    },
+    {
+      "csv_row": 19,
+      "case": "original_middle",
+      "algorithm": "Binary",
+      "dataset_size": 10000,
+      "target": 38506,
+      "batch_seconds_per_search": [
+        6.499991286545992e-07,
+        6.480002775788307e-07,
+        6.46000262349844e-07,
+        6.480002775788307e-07,
+        6.469991058111191e-07,
+        6.450002547353506e-07,
+        6.490002851933241e-07
+      ]
+    },
+    {
+      "csv_row": 20,
+      "case": "original_middle",
+      "algorithm": "Linear",
+      "dataset_size": 10000,
+      "target": 38506,
+      "batch_seconds_per_search": [
+        0.00010472499998286367,
+        0.00010513999965041876,
+        0.00010580300004221499,
+        0.00010453399969264865,
+        0.00010283000068739056,
+        0.00010822600102983415,
+        0.00010327600059099495
+      ]
+    },
+    {
+      "csv_row": 21,
+      "case": "original_last",
+      "algorithm": "Linear",
+      "dataset_size": 10000,
+      "target": 27080,
+      "batch_seconds_per_search": [
+        0.00019354699994437397,
+        0.00019531399942934513,
+        0.00020113099948503076,
+        0.00019557000021450222,
+        0.00019443499972112476,
+        0.00019805300049483777,
+        0.0001954400003887713
+      ]
+    },
+    {
+      "csv_row": 22,
+      "case": "original_last",
+      "algorithm": "Binary",
+      "dataset_size": 10000,
+      "target": 27080,
+      "batch_seconds_per_search": [
+        5.40000619366765e-07,
+        5.26999356225133e-07,
+        5.250005051493645e-07,
+        5.249993409961462e-07,
+        5.250005051493645e-07,
+        5.239993333816528e-07,
+        5.570007488131524e-07
+      ]
+    },
+    {
+      "csv_row": 23,
+      "case": "missing_above_max",
+      "algorithm": "Binary",
+      "dataset_size": 10000,
+      "target": 99998,
+      "batch_seconds_per_search": [
+        6.990006659179926e-07,
+        6.989995017647743e-07,
+        6.999995093792677e-07,
+        6.990006659179926e-07,
+        6.999995093792677e-07,
+        6.980006583034992e-07,
+        6.999995093792677e-07
+      ]
+    },
+    {
+      "csv_row": 24,
+      "case": "missing_above_max",
+      "algorithm": "Linear",
+      "dataset_size": 10000,
+      "target": 99998,
+      "batch_seconds_per_search": [
+        0.00017765299999155103,
+        0.00018301300005987286,
+        0.00018193199997767806,
+        0.00017969700042158365,
+        0.00017541700042784215,
+        0.00017950600013136864,
+        0.00018539100070483983
+      ]
+    }
+  ],
+  "source_sha256": {
+    "__init__.py": "2a889004ef0d098cfa93dedb902793cbe889ec6f5d5bd0bb2143c2872ea8d6a5",
+    "benchmark.py": "98f6450ed8a5deca18463e080574b7a92e485288c4b4a50b7d6cf71a70404b52",
+    "binary_search.py": "ce1effe33af428fd52fc1e08322e9ec6f889a120e8c988072ba42394fc151e35",
+    "data_generator.py": "8a6eefafbf389f4f155441ba95cc80b365f883d83f1a8318f586cc19f2c4330b",
+    "data_loader.py": "007d1bd611b1a68b2ce64589355a1951d9bcd0c045504e963a75879802087bee",
+    "data_processor.py": "b9e8fa69d4e628f64038e572a4d2c7d0949b2e1f3a81d40bb8093194cc879e6f",
+    "linear_search.py": "910097bed66e2345e8c2b7a7a4cc3b85c8396201aaf9ee0546dab6c00ab526e8",
+    "performance_timer.py": "6772aa6da40667c560a225e718abeb65d345226208c00974217f8918c9d190ea",
+    "results_manager.py": "a38d79778bc9e3b453ad917ed5f3f9b31d305cb5c0991c6774f24e1dd202fbf0"
+  },
+  "completed_at_utc": "2026-09-24T23:59:43.202789+00:00",
+  "csv_sha256": "77e18c5778f40474952a0b9e879b405be80c9a78e83f6b28da6791c426d5d1b4"
+}

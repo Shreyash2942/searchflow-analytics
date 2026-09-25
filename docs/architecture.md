@@ -1,10 +1,10 @@
 # Initial pipeline architecture
 
-Status: initial Version 1 design with Day 3 implementation updates. Dataset
-generation, loading, validation, preparation, and both search functions are
-implemented. `main.py` runs data preparation; searches are available as
-reusable functions. Timing, result collection, and the interactive search
-menu remain planned. The PNG shows the full target architecture.
+Status: initial Version 1 design with Day 4 implementation updates. Data
+preparation, both search functions, timing, and benchmark output are implemented.
+`main.py --benchmark` coordinates measured searches and export through
+`src/benchmark.py`. The interactive search menu and final written analysis
+remain planned. The PNG shows the full target architecture.
 
 ![Planned pipeline](../diagrams/pipeline_architecture.png)
 
@@ -43,14 +43,15 @@ versus repeated searches.
 
 | Module | Input | Output / responsibility | Day |
 | --- | --- | --- | --- |
-| `main.py` | `--generate` flag now; user search selections later | Load/validate/preview datasets, optionally regenerate them, handle data/file errors; search menu planned | 2 delivered; 5 planned |
+| `main.py` | Generation/benchmark flags and timing settings; search selections later | Preview data or run benchmarks and display results; handle errors | 2/4 delivered; 5 planned |
 | `src/data_generator.py` | Size and documented generation settings | Integer data and required stored CSV datasets | 2 delivered |
 | `src/data_loader.py` | CSV path and optional expected size | Validated integer list or a clear loading failure | 2 delivered |
 | `src/data_processor.py` | Loaded list and optional expected size | Validated original-order list and independently sorted copy | 2 delivered |
 | `src/linear_search.py` | Original-order list and target | First matching index or `-1` | 3 delivered |
 | `src/binary_search.py` | Ascending sorted list and target | Any matching index or `-1` | 3 delivered |
-| `src/performance_timer.py` | Search function, input, target, repetition settings | Search result and measured time | 4 |
-| `src/results_manager.py` | Benchmark records | CSV headers and rows in `results/` | 4 |
+| `src/performance_timer.py` | Search function, prepared input, target, repetition settings | Index, median seconds/search, and per-batch samples | 4 delivered |
+| `src/results_manager.py` | Validated benchmark records | Exact CSV schema in `results/` | 4 delivered |
+| `src/benchmark.py` | Dataset/output directories and timing settings | Both algorithms, four cases per size, separate sort measurements, CSV and metadata export | 4 delivered |
 
 ## Contracts and boundaries
 
@@ -73,7 +74,9 @@ versus repeated searches.
 - Storage and terminal output stay outside the search functions and timed
   region. Use project-relative locations rather than machine-specific paths.
 - CSV records have `algorithm,dataset_size,target,found,index,execution_time`.
-  Benchmark settings and units must be documented when Day 4 is implemented.
+  The time unit is seconds per search, summarized as the median batch mean.
+  A metadata sidecar maps each record to its case and samples; sorting times
+  are stored separately. See [benchmark methodology](benchmark_methodology.md).
 - Tests belong in `tests/`. Use standard-library `unittest` so application
   setup does not require a separate test framework.
 

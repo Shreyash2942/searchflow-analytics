@@ -7,10 +7,11 @@ Those source documents live in the parent portfolio workspace. The planned
 release is `v1.0.0`; requirements below describe future acceptance, not current
 feature completion. Repository name: `searchflow-analytics`.
 
-Current implementation: Days 1–3 are complete. FR-01, FR-02, FR-03, FR-09
-(including friendly entry-point error reporting), and FR-10 are implemented
-and tested. Timing, benchmark output, interactive search selection, and written
-analysis remain future work. See [Day 3 evidence](day_3_checklist.md).
+Current implementation: Days 1–4 are complete. Data preparation, both searches,
+timing (FR-05), benchmark CSV output (FR-07), and measured comparisons at all
+required sizes (the measurement portion of FR-08) are implemented and tested.
+Interactive search selection and final written analysis remain future work.
+See [Day 4 evidence](day_4_checklist.md).
 
 ## Functional requirements
 
@@ -108,7 +109,24 @@ Day 3 search contract (implemented):
 - Standard Python lists/tuples supply constant-time indexing for the stated
   binary-search complexity. Both implementations use constant auxiliary space.
 
-Resolve before the remaining features are built:
+Day 4 benchmark contract (implemented):
 
-- Day 4: target cases, repetition count, timing units, summary statistic,
-  and how separately measured sorting costs will be reported.
+- Use `time.perf_counter()` with defaults of seven batches, 100 calls per batch,
+  three untimed warm-ups, and one untimed correctness-check call per case/algorithm.
+- Save the median batch average as seconds per search. Timed regions include
+  loop/call overhead and exclude validation, sorting, loading, and output.
+- Test original first/middle/last values and `max(data) + 1` at each size.
+  Alternate algorithm order between cases; the same target is used for both.
+- Export 24 rows with the required six columns. Preserve index-zero matches;
+  validate found/index consistency and finite nonnegative measured times.
+- Store raw per-batch samples, case mapping, timestamps, Python/platform details,
+  settings, input/source hashes, and the CSV hash in `benchmark_metadata.json`.
+- Measure sorting separately with the median of seven individual sorted-copy
+  operations (or the configured repeat count). Do not add sorting to search CSV values.
+- `--benchmark` explicitly replaces result files. Invalid settings, missing files,
+  or malformed inputs report an error. Keep prior results if computation fails
+  before export. Reruns produce new actual timings, not identical timing values.
+
+The complete methodology and interpretation limits are in
+[benchmark_methodology.md](benchmark_methodology.md). Day 5 adds interactive
+search selection; Day 6 develops the required analysis and recommendations.

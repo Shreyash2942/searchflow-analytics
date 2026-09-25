@@ -5,10 +5,9 @@ CSV data-processing pipeline. The planned Version 1 release is `v1.0.0`.
 
 ## Current status
 
-Days 1–3 are complete: project setup, reproducible datasets, CSV loading,
-validation, independent sorted copies, and linear/binary search functions.
-`main.py` runs the data preparation pipeline; the search functions can be used
-directly as shown below. Timing and the interactive search menu follow on Days 4–5.
+Days 1–4 are complete: data preparation, linear/binary search, high-resolution
+timing, and measured benchmark CSV output with run metadata. `main.py` prepares
+datasets or runs benchmarks. Interactive search selection follows on Day 5.
 
 ## Objectives
 
@@ -19,7 +18,7 @@ directly as shown below. Timing and the interactive search menu follow on Days 4
 
 ## Setup
 
-Use Python 3.10 or newer. Days 1–3 were verified locally with Python 3.14.4.
+Use Python 3.10 or newer. Days 1–4 were verified locally with Python 3.14.4.
 Run these commands from the repository root in PowerShell:
 
 ```powershell
@@ -44,7 +43,7 @@ SearchFlow Analytics
 dataset_100.csv: 100 integers validated; sorted copy ready.
 dataset_1000.csv: 1,000 integers validated; sorted copy ready.
 dataset_10000.csv: 10,000 integers validated; sorted copy ready.
-Data pipeline ready. Search functions are available; timing follows on Day 4.
+Data pipeline ready. Use --benchmark to measure both search algorithms.
 ```
 
 To regenerate all three CSV files with seed `42`, replacing their current contents:
@@ -59,6 +58,37 @@ See [dataset format and reproducibility](data/README.md) for the data contract.
 The application and tests use the Python standard library (`csv`,
 `random`, `pathlib`, `time`, `statistics`, and `unittest`); no third-party runtime
 packages are currently required.
+
+## Benchmarks
+
+Measure both searches at all three sizes and replace the saved benchmark files:
+
+```powershell
+.\.venv\Scripts\python.exe main.py --benchmark
+```
+
+Each run records 24 rows: three dataset sizes, four target cases, and two
+algorithms. Defaults are seven batches of 100 searches, three warm-up calls,
+and the median batch average in **seconds per search**. Customize with:
+
+```powershell
+.\.venv\Scripts\python.exe main.py --benchmark --repeats 9 --iterations 200 --warmups 5
+```
+
+`--generate --benchmark` regenerates the seeded datasets before measuring.
+Timing options require `--benchmark`. Normal execution without either flag
+only reads and previews the data.
+
+- [performance_results.csv](results/performance_results.csv): the required
+  `algorithm,dataset_size,target,found,index,execution_time` columns.
+- [benchmark_metadata.json](results/benchmark_metadata.json): settings, raw
+  samples, case-to-row mapping, separate sorting times, environment, and hashes.
+- [Benchmark methodology](docs/benchmark_methodology.md): timing boundaries,
+  target selection, interpretation, and the recorded run summary.
+
+In the captured Day 4 run, linear search was faster for the first original
+value; binary search was faster for missing targets. Search-only timings do
+not include sorting cost and do not establish that one algorithm is always best.
 
 ## Search examples
 
@@ -103,7 +133,7 @@ the measured results. See [architecture and contracts](docs/architecture.md).
 
 ```text
 searchflow-analytics/
-|-- main.py                  # Day 2 data pipeline; interactive search on Day 5
+|-- main.py                  # Preparation/benchmark commands; search menu on Day 5
 |-- requirements.txt         # Runtime dependencies
 |-- .gitignore
 |-- src/
@@ -112,19 +142,27 @@ searchflow-analytics/
 |   |-- data_loader.py
 |   |-- data_processor.py
 |   |-- linear_search.py
-|   `-- binary_search.py
+|   |-- binary_search.py
+|   |-- performance_timer.py
+|   |-- results_manager.py
+|   `-- benchmark.py
 |-- data/                   # README and generated 100/1,000/10,000-value CSV files
-|-- results/                # Measured benchmark CSV on Day 4
+|-- results/                # Measured benchmark CSV and run metadata
 |-- tests/
 |   |-- test_data_pipeline.py
 |   |-- test_linear_search.py
-|   `-- test_binary_search.py
+|   |-- test_binary_search.py
+|   |-- test_performance_timer.py
+|   |-- test_results_manager.py
+|   `-- test_benchmark.py
 |-- docs/
 |   |-- requirements.md
 |   |-- architecture.md
 |   |-- day_1_checklist.md
 |   |-- day_2_checklist.md
 |   |-- day_3_checklist.md
+|   |-- day_4_checklist.md
+|   |-- benchmark_methodology.md
 |   `-- screenshots/         # Working application captures on Day 7
 `-- diagrams/
     |-- render_architecture.py
@@ -142,11 +180,11 @@ Run the data pipeline and search tests from the repository root:
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-All 39 tests pass. Coverage includes dataset/CSV validation, reproducibility,
-copy independence, entry-point behavior, search boundary cases, duplicates,
-small-input oracle comparisons, and searching all three required sizes.
-Indexed-read checks verify binary search's logarithmic work bound and one-read
-midpoint match. Actual timing and benchmark measurements follow on Day 4.
+All 56 tests pass. Coverage includes data preparation, search correctness,
+binary-search work bounds, timing arithmetic and boundaries, CSV validation,
+benchmark metadata, all required sizes, and entry-point errors. Controlled
+clocks are used only in timer unit tests; published benchmark values come from
+actual calls to `time.perf_counter()`.
 
 ## Delivery plan
 
@@ -155,14 +193,15 @@ midpoint match. Actual timing and benchmark measurements follow on Day 4.
 | 1 — complete | Environment, requirements, structure, architecture |
 | 2 — complete | Dataset generation, loading, validation, sorted copies |
 | 3 — complete | Linear and binary search |
-| 4 | Timing and benchmark CSV |
+| 4 — complete | Timing and benchmark CSV |
 | 5 | Interactive CLI and integration |
 | 6 | Complete tests, Big O analysis, recommendation guide |
 | 7 | Final validation, screenshots, README, `v1.0.0` release |
 
 See [Version 1 requirements](docs/requirements.md) and the
-[Day 3 quality gate](docs/day_3_checklist.md). The
-[Day 1](docs/day_1_checklist.md) and [Day 2](docs/day_2_checklist.md) quality gates
+[Day 4 quality gate](docs/day_4_checklist.md). The
+[Day 1](docs/day_1_checklist.md), [Day 2](docs/day_2_checklist.md), and
+[Day 3](docs/day_3_checklist.md) quality gates
 are retained as historical records.
 This version stays local:
 cloud deployment, databases, APIs, containers, orchestration, CI/CD,
