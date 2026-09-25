@@ -164,7 +164,7 @@ class CsvPipelineTests(unittest.TestCase):
     def test_entry_point_reports_missing_file_without_traceback(self):
         errors = io.StringIO()
         with patch.object(main, "DEFAULT_DATA_DIR", self.directory), \
-                patch("sys.argv", ["main.py"]), redirect_stderr(errors), \
+                patch("sys.argv", ["main.py", "--preview"]), redirect_stderr(errors), \
                 redirect_stdout(io.StringIO()):
             self.assertEqual(main.main(), 1)
         self.assertIn("--generate", errors.getvalue())
