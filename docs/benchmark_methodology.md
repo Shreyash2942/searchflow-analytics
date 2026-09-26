@@ -95,4 +95,6 @@ for readability. This dated snapshot is historical if result files are regenerat
 In this run, missing-target linear time increased much more with input size.
 Linear search was faster for the original first value, where it immediately
 returned index zero. Both observations are consistent with the algorithms'
-different work patterns; the small sample is not a substitute for the final analysis.
+different work patterns. The completed [Big O analysis](big_o_analysis.md)
+explains the theoretical bounds and sample limitations; the
+[recommendation guide](recommendation_guide.md) accounts for sorting costs.

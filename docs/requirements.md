@@ -4,15 +4,17 @@ This repository specification translates the supplied
 `README_Search_Performance_Data_Pipeline_V1.md` (especially Day 1 and scope)
 and `VERSION_1_REQUIREMENTS.md` into implementation and acceptance criteria.
 Those source documents live in the parent portfolio workspace. The planned
-release is `v1.0.0`; requirements below describe future acceptance, not current
-feature completion. Repository name: `searchflow-analytics`.
+release is `v1.0.0`. Requirements below define acceptance criteria; milestone
+evidence records current completion. Repository name: `searchflow-analytics`.
 
-Current implementation: Days 1–5 are complete. Data preparation, both searches,
+Current implementation: Days 1–6 are complete. Data preparation, both searches,
 timing (FR-05), benchmark CSV output (FR-07), and measured comparisons at all
 required sizes (the measurement portion of FR-08) are implemented and tested.
 Interactive search selection (FR-04) and found/index/time display (FR-06) are
-also implemented. Final written analysis remains future work.
-See [Day 5 evidence](day_5_checklist.md).
+also implemented. The [Big O analysis](big_o_analysis.md) and
+[recommendation guide](recommendation_guide.md) complete FR-08, FR-11, and FR-12.
+All 73 tests pass; see [Day 6 evidence](day_6_checklist.md). Day 7 final
+submission and release work remains pending.
 
 ## Functional requirements
 
@@ -130,8 +132,8 @@ Day 4 benchmark contract (implemented):
   before export. Reruns produce new actual timings, not identical timing values.
 
 The complete methodology and interpretation limits are in
-[benchmark_methodology.md](benchmark_methodology.md). Day 6 develops the
-required analysis and recommendations.
+[benchmark_methodology.md](benchmark_methodology.md). Day 6 delivers the
+[required analysis](big_o_analysis.md) and [recommendations](recommendation_guide.md).
 
 Day 5 interaction contract (implemented):
 

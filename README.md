@@ -5,10 +5,12 @@ CSV data-processing pipeline. The planned Version 1 release is `v1.0.0`.
 
 ## Current status
 
-Days 1–5 are complete: data preparation, linear/binary search, measured
-benchmarks, and an interactive search menu. `main.py` opens the menu by default;
-batch commands support previewing, generation, and benchmark export. Final
-analysis and submission documentation remain Days 6–7 work.
+Days 1–6 are complete: data preparation, linear/binary search, measured
+benchmarks, an interactive search menu, and validated analysis. `main.py` opens
+the menu by default; batch commands support previewing, generation, and benchmark
+export. Read the [Big O analysis](docs/big_o_analysis.md) and
+[algorithm recommendation guide](docs/recommendation_guide.md). Day 7 final
+submission checks, screenshots, and release remain pending.
 
 ## Objectives
 
@@ -19,7 +21,7 @@ analysis and submission documentation remain Days 6–7 work.
 
 ## Setup
 
-Use Python 3.10 or newer. Days 1–5 were verified locally with Python 3.14.4.
+Use Python 3.10 or newer. Days 1–6 were verified locally with Python 3.14.4.
 Run these commands from the repository root in PowerShell:
 
 ```powershell
@@ -189,6 +191,9 @@ searchflow-analytics/
 |   |-- day_3_checklist.md
 |   |-- day_4_checklist.md
 |   |-- day_5_checklist.md
+|   |-- day_6_checklist.md
+|   |-- big_o_analysis.md
+|   |-- recommendation_guide.md
 |   |-- benchmark_methodology.md
 |   `-- screenshots/         # Working application captures on Day 7
 `-- diagrams/
@@ -224,13 +229,14 @@ actual calls to `time.perf_counter()`.
 | 3 — complete | Linear and binary search |
 | 4 — complete | Timing and benchmark CSV |
 | 5 — complete | Interactive CLI and integration |
-| 6 | Complete tests, Big O analysis, recommendation guide |
+| 6 — complete | Test coverage audit, Big O analysis, recommendation guide |
 | 7 | Final validation, screenshots, README, `v1.0.0` release |
 
 See [Version 1 requirements](docs/requirements.md) and the
-[Day 5 quality gate](docs/day_5_checklist.md). The
-[Day 1](docs/day_1_checklist.md), [Day 2](docs/day_2_checklist.md), and
-[Day 3](docs/day_3_checklist.md), and [Day 4](docs/day_4_checklist.md) quality gates
+[Day 6 quality gate](docs/day_6_checklist.md). The
+[Day 1](docs/day_1_checklist.md), [Day 2](docs/day_2_checklist.md),
+[Day 3](docs/day_3_checklist.md), [Day 4](docs/day_4_checklist.md), and
+[Day 5](docs/day_5_checklist.md) quality gates
 are retained as historical records.
 This version stays local:
 cloud deployment, databases, APIs, containers, orchestration, CI/CD,

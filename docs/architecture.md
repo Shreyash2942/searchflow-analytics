@@ -1,9 +1,10 @@
 # Initial pipeline architecture
 
-Status: initial Version 1 design with Day 5 implementation updates. Data
-preparation, searches, timing, benchmark output, and the interactive menu are
+Status: initial Version 1 design updated through Day 6. Data preparation,
+searches, timing, benchmark output, and the interactive menu are
 implemented. `main.py` routes menu sessions to `src/cli.py` and full benchmark
-runs to `src/benchmark.py`. Final written analysis remains planned.
+runs to `src/benchmark.py`. Written [analysis](big_o_analysis.md) and
+[recommendations](recommendation_guide.md) interpret the measured results.
 The PNG shows the full target architecture.
 
 ![Planned pipeline](../diagrams/pipeline_architecture.png)
