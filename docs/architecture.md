@@ -1,6 +1,6 @@
 # Initial pipeline architecture
 
-Status: initial Version 1 design updated through Day 6. Data preparation,
+Status: Version 1.0.0 architecture. Data preparation,
 searches, timing, benchmark output, and the interactive menu are
 implemented. `main.py` routes menu sessions to `src/cli.py` and full benchmark
 runs to `src/benchmark.py`. Written [analysis](big_o_analysis.md) and

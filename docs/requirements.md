@@ -7,14 +7,15 @@ Those source documents live in the parent portfolio workspace. The planned
 release is `v1.0.0`. Requirements below define acceptance criteria; milestone
 evidence records current completion. Repository name: `searchflow-analytics`.
 
-Current implementation: Days 1–6 are complete. Data preparation, both searches,
+Current implementation: Days 1–7 are complete. Data preparation, both searches,
 timing (FR-05), benchmark CSV output (FR-07), and measured comparisons at all
 required sizes (the measurement portion of FR-08) are implemented and tested.
 Interactive search selection (FR-04) and found/index/time display (FR-06) are
 also implemented. The [Big O analysis](big_o_analysis.md) and
 [recommendation guide](recommendation_guide.md) complete FR-08, FR-11, and FR-12.
-All 73 tests pass; see [Day 6 evidence](day_6_checklist.md). Day 7 final
-submission and release work remains pending.
+All 73 tests pass; see [Day 6 evidence](day_6_checklist.md) and the
+[Day 7 final evidence](day_7_checklist.md). The `v1.0.0` tag completes the
+planned local Version 1 scope.
 
 ## Functional requirements
 
@@ -66,7 +67,7 @@ must be discussed separately from its search complexity.
 - Final README: title, description, objectives, features, architecture, technologies,
   structure, setup, run instructions, examples, dataset sizes, algorithms, tests,
   performance summary, screenshots, status, author, and version.
-- Release: complete all acceptance checks before preparing `v1.0.0` on Day 7.
+- Release: all acceptance checks are complete in the annotated `v1.0.0` tag.
 - Plan follow-through: document the retrospective and future ideas after release.
 
 ## Scope and design decisions

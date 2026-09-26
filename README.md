@@ -1,16 +1,21 @@
 # SearchFlow Analytics
 
 A Python portfolio project for comparing linear and binary search in a local
-CSV data-processing pipeline. The planned Version 1 release is `v1.0.0`.
+CSV data-processing pipeline. Version 1.0.0 is the completed college portfolio
+release.
 
 ## Current status
 
-Days 1–6 are complete: data preparation, linear/binary search, measured
+Days 1–7 are complete: data preparation, linear/binary search, measured
 benchmarks, an interactive search menu, and validated analysis. `main.py` opens
 the menu by default; batch commands support previewing, generation, and benchmark
 export. Read the [Big O analysis](docs/big_o_analysis.md) and
-[algorithm recommendation guide](docs/recommendation_guide.md). Day 7 final
-submission checks, screenshots, and release remain pending.
+[algorithm recommendation guide](docs/recommendation_guide.md). Final evidence
+and screenshots are recorded in the [Day 7 checklist](docs/day_7_checklist.md).
+
+**Version:** `v1.0.0`
+
+**Portfolio author:** `Shreyash2942`
 
 ## Objectives
 
@@ -21,7 +26,7 @@ submission checks, screenshots, and release remain pending.
 
 ## Setup
 
-Use Python 3.10 or newer. Days 1–6 were verified locally with Python 3.14.4.
+Use Python 3.10 or newer. Days 1–7 were verified locally with Python 3.14.4.
 Run these commands from the repository root in PowerShell:
 
 ```powershell
@@ -152,8 +157,20 @@ cost is separate from the search complexities above.
 
 The CLI coordinates loading, validation, the original/sorted branches, timed
 searches, and result display. Full benchmark runs also export CSV and metadata.
-Written analysis will use the measured results. See
+Written analysis interprets the measured results. See
 [architecture and contracts](docs/architecture.md).
+
+## Screenshots
+
+The final portfolio captures are stored under [`docs/screenshots/`](docs/screenshots/):
+
+| Capture | Evidence |
+| --- | --- |
+| Linear search on 100 values | [linear_100_success.png](docs/screenshots/linear_100_success.png) |
+| Binary search on 1,000 values | [binary_1000_success.png](docs/screenshots/binary_1000_success.png) |
+| Both algorithms on 10,000 values | [both_10000_success.png](docs/screenshots/both_10000_success.png) |
+| Missing target and main menu | [missing_target.png](docs/screenshots/missing_target.png), [main_menu.png](docs/screenshots/main_menu.png) |
+| Final benchmark results | [final_benchmark_results.png](docs/screenshots/final_benchmark_results.png) |
 
 ## Repository structure
 
@@ -195,7 +212,8 @@ searchflow-analytics/
 |   |-- big_o_analysis.md
 |   |-- recommendation_guide.md
 |   |-- benchmark_methodology.md
-|   `-- screenshots/         # Working application captures on Day 7
+|   `-- day_7_checklist.md
+|   `-- screenshots/         # Final application and benchmark captures
 `-- diagrams/
     |-- render_architecture.py
     `-- pipeline_architecture.png
@@ -218,7 +236,9 @@ benchmark metadata, all required sizes, and interactive input/recovery/exit
 behavior. The menu is also checked through a real piped terminal session from
 the parent directory, with dataset/result files unchanged. Controlled
 clocks are used only in timer unit tests; published benchmark values come from
-actual calls to `time.perf_counter()`.
+actual calls to `time.perf_counter()`. Day 7 additionally reran the complete
+24-row benchmark in a temporary output directory and verified every row and
+its CSV hash without replacing the dated published benchmark evidence.
 
 ## Delivery plan
 
@@ -230,10 +250,10 @@ actual calls to `time.perf_counter()`.
 | 4 — complete | Timing and benchmark CSV |
 | 5 — complete | Interactive CLI and integration |
 | 6 — complete | Test coverage audit, Big O analysis, recommendation guide |
-| 7 | Final validation, screenshots, README, `v1.0.0` release |
+| 7 — complete | Final validation, screenshots, README, `v1.0.0` release |
 
 See [Version 1 requirements](docs/requirements.md) and the
-[Day 6 quality gate](docs/day_6_checklist.md). The
+[Day 7 quality gate](docs/day_7_checklist.md). The
 [Day 1](docs/day_1_checklist.md), [Day 2](docs/day_2_checklist.md),
 [Day 3](docs/day_3_checklist.md), [Day 4](docs/day_4_checklist.md), and
 [Day 5](docs/day_5_checklist.md) quality gates
