@@ -24,5 +24,5 @@ APIs, dashboards, authentication, containers, CI/CD, distributed processing,
 and advanced search algorithms remain future ideas outside Version 1.
 
 The release is supported by the clean Git history, the `v1.0.0` annotated tag,
-the [Day 7 validation record](day_7_checklist.md), and the runnable
+the [final submission checklist](final_submission_checklist.md), and the runnable
 [README](../README.md).

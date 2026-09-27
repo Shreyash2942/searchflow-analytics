@@ -13,9 +13,9 @@ required sizes (the measurement portion of FR-08) are implemented and tested.
 Interactive search selection (FR-04) and found/index/time display (FR-06) are
 also implemented. The [Big O analysis](big_o_analysis.md) and
 [recommendation guide](recommendation_guide.md) complete FR-08, FR-11, and FR-12.
-All 73 tests pass; see [Day 6 evidence](day_6_checklist.md) and the
-[Day 7 final evidence](day_7_checklist.md). The `v1.0.0` tag completes the
-planned local Version 1 scope.
+All 73 tests pass; see the [combined development history](combined_days.md) and
+[final submission checklist](final_submission_checklist.md). The `v1.0.0` tag
+completes the planned local Version 1 scope.
 
 ## Functional requirements
 

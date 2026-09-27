@@ -160,7 +160,7 @@ validation, sorting, search boundaries and duplicates, logarithmic binary
 read bounds, timing arithmetic, benchmark export, metadata, menu recovery,
 and command routing. The final portfolio also includes application captures,
 the architecture diagram, the Big O analysis, the recommendation guide, and
-the [Day 7 validation checklist](day_7_checklist.md).
+the [final submission checklist](final_submission_checklist.md).
 
 Version 1.0.0 is represented by the annotated `v1.0.0` tag. See
 [release_notes.md](release_notes.md) for the release boundary and included

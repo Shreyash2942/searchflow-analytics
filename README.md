@@ -136,14 +136,13 @@ Start with the document that matches your purpose:
 - [Architecture](docs/architecture.md) — pipeline diagram and module contracts.
 - [Benchmark methodology](docs/benchmark_methodology.md) — timing boundaries,
   target cases, raw-sample interpretation, and reproducibility.
-- [Day 7 checklist](docs/day_7_checklist.md) — final validation, screenshots,
-  and release evidence.
+- [Final submission checklist](docs/final_submission_checklist.md) — final
+  requirements audit, validation, and submission package.
 - [Release notes](docs/release_notes.md) — Version 1 included scope and limits.
 
-The original [Day 1](docs/day_1_checklist.md), [Day 2](docs/day_2_checklist.md),
-[Day 3](docs/day_3_checklist.md), [Day 4](docs/day_4_checklist.md),
-[Day 5](docs/day_5_checklist.md), and [Day 6](docs/day_6_checklist.md)
-checklists remain available as detailed historical records.
+The seven daily milestones are consolidated in
+[combined_days.md](docs/combined_days.md); the individual daily checklist
+files are no longer needed in the submission repository.
 
 ## Repository structure
 

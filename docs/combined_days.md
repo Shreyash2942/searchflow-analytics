@@ -1,7 +1,8 @@
 # SearchFlow Analytics: combined seven-day development history
 
 This document consolidates the daily milestones into one submission-friendly
-history. The original daily checklists remain available for detailed evidence.
+history. Individual checklist files are intentionally omitted from the
+submission repository because their evidence is preserved here.
 
 ## At a glance
 
@@ -24,7 +25,7 @@ workflow were established. The architecture diagram defines the flow from CLI
 selection through data preparation, the two search branches, timing, results,
 and written analysis.
 
-Evidence: [Day 1 checklist](day_1_checklist.md),
+Evidence: this consolidated Day 1 record,
 [architecture](architecture.md), and
 [pipeline diagram](../diagrams/pipeline_architecture.png).
 
@@ -37,7 +38,7 @@ headers, rows, values, encodings, empty data, and wrong counts. Processing
 validates the data, preserves original order, and creates an independent sorted
 copy without mutating the input.
 
-Evidence: [Day 2 checklist](day_2_checklist.md) and
+Evidence: this consolidated Day 2 record and
 [dataset contract](../data/README.md).
 
 ## Day 3 — search algorithms
@@ -49,7 +50,7 @@ support empty sequences at the algorithm boundary, and use O(1) auxiliary
 space. Tests cover boundaries, missing values, duplicates, tuples, and binary
 indexed-read bounds.
 
-Evidence: [Day 3 checklist](day_3_checklist.md),
+Evidence: this consolidated Day 3 record,
 [linear_search.py](../src/linear_search.py), and
 [binary_search.py](../src/binary_search.py).
 
@@ -62,7 +63,7 @@ records raw samples, settings, timestamps, platform details, sort timings,
 dataset hashes, source hashes, and the exported CSV hash. Search timing
 excludes loading, validation, sorting, and output.
 
-Evidence: [Day 4 checklist](day_4_checklist.md),
+Evidence: this consolidated Day 4 record,
 [benchmark methodology](benchmark_methodology.md), and
 [saved results](../results/performance_results.csv).
 
@@ -76,7 +77,7 @@ menu; `q`, EOF, and Ctrl+C exit cleanly. Batch preview, generation, and
 benchmark commands remain available, and interactive searches do not overwrite
 saved evidence.
 
-Evidence: [Day 5 checklist](day_5_checklist.md),
+Evidence: this consolidated Day 5 record,
 [CLI module](../src/cli.py), and [application screenshots](screenshots/).
 
 ## Day 6 — analysis and recommendations
@@ -89,7 +90,7 @@ ordering, dataset size, query frequency, preparation cost, memory, and index
 requirements. It explicitly distinguishes a reusable sorted list from the
 current menu, which prepares data for each selection.
 
-Evidence: [Day 6 checklist](day_6_checklist.md),
+Evidence: this consolidated Day 6 record,
 [Big O analysis](big_o_analysis.md), and
 [recommendation guide](recommendation_guide.md).
 
@@ -107,7 +108,8 @@ operating guide were added, and release notes document the Version 1 boundary.
 The annotated `v1.0.0` tag points to the published release commit, and GitHub
 `main` matches it at the time of release.
 
-Evidence: [Day 7 checklist](day_7_checklist.md),
+Evidence: this consolidated Day 7 record,
+[final submission checklist](final_submission_checklist.md),
 [project report](project_report.md), [release notes](release_notes.md),
 [APA 7 report](APA_SearchFlow_Analytics_Report.docx), and [screenshots](screenshots/).
 
@@ -118,12 +120,7 @@ history, runnable commands, measured evidence, theory tied to implementation,
 and a clear scope boundary. Future work can be considered after review, but it
 is not required for this portfolio milestone.
 
-### Original daily records
+### Final verification
 
-- [Day 1](day_1_checklist.md)
-- [Day 2](day_2_checklist.md)
-- [Day 3](day_3_checklist.md)
-- [Day 4](day_4_checklist.md)
-- [Day 5](day_5_checklist.md)
-- [Day 6](day_6_checklist.md)
-- [Day 7](day_7_checklist.md)
+See the [final submission checklist](final_submission_checklist.md) for the
+requirements audit, test result, artifact verification, and submission package.
