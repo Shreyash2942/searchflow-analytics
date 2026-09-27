@@ -1,33 +1,48 @@
 # SearchFlow Analytics
 
-A Python portfolio project for comparing linear and binary search in a local
-CSV data-processing pipeline. Version 1.0.0 is the completed college portfolio
-release.
+SearchFlow Analytics is a Python portfolio project that explains when linear
+search or binary search is the better practical choice. It generates
+reproducible integer data, validates CSV input, searches original and sorted
+views, measures real execution time, and presents the results through a local
+command-line application.
 
-## Current status
+Version 1.0.0 is complete and released for the Design and Analysis of
+Algorithms portfolio.
 
-Days 1–7 are complete: data preparation, linear/binary search, measured
-benchmarks, an interactive search menu, and validated analysis. `main.py` opens
-the menu by default; batch commands support previewing, generation, and benchmark
-export. Read the [Big O analysis](docs/big_o_analysis.md) and
-[algorithm recommendation guide](docs/recommendation_guide.md). Final evidence
-and screenshots are recorded in the [Day 7 checklist](docs/day_7_checklist.md).
+**Author:** Shreyash2942
 
-**Version:** `v1.0.0`
+**Release:** [`v1.0.0`](https://github.com/Shreyash2942/searchflow-analytics/tree/v1.0.0)
 
-**Portfolio author:** `Shreyash2942`
+**Runtime:** Python 3.10+ standard library
 
-## Objectives
+**Repository:** [Shreyash2942/searchflow-analytics](https://github.com/Shreyash2942/searchflow-analytics)
 
-- Generate and validate datasets containing 100, 1,000, and 10,000 integers.
-- Compare linear search on unsorted data with binary search on a sorted copy.
-- Measure actual execution times and save benchmark results to CSV.
-- Explain O(n) versus O(log n), including sorting costs and usage recommendations.
+## Why this project exists
 
-## Setup
+Algorithm complexity is useful only when it is connected to a workload.
+Linear search can be the right answer for unsorted data, small inputs, or an
+early match because it needs no preparation. Binary search can be the right
+answer for large sorted data and repeated lookups because it narrows the
+search interval logarithmically. SearchFlow Analytics makes that trade-off
+concrete by measuring both algorithms at 100, 1,000, and 10,000 values while
+recording sorting costs separately.
 
-Use Python 3.10 or newer. Days 1–7 were verified locally with Python 3.14.4.
-Run these commands from the repository root in PowerShell:
+## What the application does
+
+- Generates deterministic CSV datasets with 100, 1,000, and 10,000 integers.
+- Loads, validates, and preserves original-order data.
+- Creates an independent sorted copy for binary search.
+- Runs linear search, binary search, or both from an interactive menu.
+- Reports found status, zero-based index, and seconds per search.
+- Benchmarks four target cases across all sizes and writes 24 result rows.
+- Stores raw timing samples, sorting measurements, environment details, and
+  SHA-256 provenance hashes in `benchmark_metadata.json`.
+- Provides 73 automated tests, complexity analysis, recommendations, and
+  portfolio screenshots.
+
+## Quick start
+
+From the repository root in Windows PowerShell:
 
 ```powershell
 python -m venv .venv
@@ -35,230 +50,115 @@ python -m venv .venv
 .\.venv\Scripts\python.exe main.py
 ```
 
-Calling the environment's interpreter directly does not require activation or
-changes to PowerShell's execution policy. On macOS/Linux, use
-`.venv/bin/python` after creating the environment with `python3 -m venv .venv`.
-
-The three datasets are already included. The menu prompts for a dataset size,
-integer target, and linear search, binary search, or both:
+The menu asks for a dataset size, a signed integer target, and a search mode:
 
 ```text
-Select Dataset Size
 1. 100
 2. 1,000
 3. 10,000
-Enter option (q to quit):
+
+1. Linear Search
+2. Binary Search
+3. Compare Both
 ```
 
-For a quick example, choose `1`, enter `83810`, then choose `3` to compare both.
-The included 100-value dataset returns linear index `0` and binary index `82`;
-indexes refer to original-order and sorted data respectively. Times are measured
-live and vary between runs. Each result shows found status, index, and seconds
-per search. The next dataset menu starts another search.
+Enter `q` at any prompt to quit. For a quick successful comparison, choose
+dataset `1`, target `83810`, and mode `3`. The linear result uses original-order
+index `0`; the binary result uses an index in the sorted copy.
 
-Enter `q` at any prompt to exit. Blank/invalid choices and noninteger targets
-are re-prompted; zero and negative integer targets are valid. EOF or Ctrl+C
-ends the session cleanly. File/data errors return to the dataset menu, allowing
-another selection. Interactive searches display results without changing datasets
-or overwriting saved benchmark files.
+For macOS/Linux, replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`.
+The full operating guide is [docs/run_instructions.md](docs/run_instructions.md).
 
-To use the previous non-interactive data preview:
+## Benchmark and tests
 
-```powershell
-.\.venv\Scripts\python.exe main.py --preview
-```
-
-To regenerate all three CSV files with seed `42`, replacing their current contents:
-
-```powershell
-.\.venv\Scripts\python.exe main.py --generate
-```
-
-`--generate` alone regenerates and previews without prompting. Combine it with
-`--interactive` to open the menu afterward, or `--benchmark` to measure afterward.
-The explicit action flags `--interactive`, `--preview`, and `--benchmark` are
-mutually exclusive. Resource paths are based on the project location, so commands
-also work when launched from another directory.
-
-Batch file/data errors return a nonzero exit code. Interactive file errors
-allow recovery within the menu; `q`, EOF, and Ctrl+C exit the session with status 0.
-See [dataset format and reproducibility](data/README.md) for the data contract.
-
-The application and tests use the Python standard library (`csv`,
-`random`, `pathlib`, `time`, `statistics`, and `unittest`); no third-party runtime
-packages are currently required.
-
-## Benchmarks
-
-Measure both searches at all three sizes and replace the saved benchmark files:
+Run the complete benchmark:
 
 ```powershell
 .\.venv\Scripts\python.exe main.py --benchmark
 ```
 
-Each run records 24 rows: three dataset sizes, four target cases, and two
-algorithms. Defaults are seven batches of 100 searches, three warm-up calls,
-and the median batch average in **seconds per search**. Customize with:
+This measures 3 sizes x 4 target cases x 2 algorithms and writes:
 
-```powershell
-.\.venv\Scripts\python.exe main.py --benchmark --repeats 9 --iterations 200 --warmups 5
-```
+- [results/performance_results.csv](results/performance_results.csv)
+- [results/benchmark_metadata.json](results/benchmark_metadata.json)
 
-`--generate --benchmark` regenerates the seeded datasets before measuring.
-Timing options require `--benchmark`; the interactive menu uses the documented
-default settings. Invalid benchmark settings are rejected before regeneration
-or measurement begins.
-
-- [performance_results.csv](results/performance_results.csv): the required
-  `algorithm,dataset_size,target,found,index,execution_time` columns.
-- [benchmark_metadata.json](results/benchmark_metadata.json): settings, raw
-  samples, case-to-row mapping, separate sorting times, environment, and hashes.
-- [Benchmark methodology](docs/benchmark_methodology.md): timing boundaries,
-  target selection, interpretation, and the recorded run summary.
-
-In the captured Day 4 run, linear search was faster for the first original
-value; binary search was faster for missing targets. Search-only timings do
-not include sorting cost and do not establish that one algorithm is always best.
-
-## Search examples
-
-From the repository root, start Python with `.\.venv\Scripts\python.exe`, then:
-
-```python
-from src.linear_search import linear_search
-from src.binary_search import binary_search
-from src.data_processor import prepare_search_data
-
-original, ordered = prepare_search_data([7, 2, 9, 4])
-print(linear_search(original, 9))  # 2, in original order
-print(binary_search(ordered, 9))  # 3, in [2, 4, 7, 9]
-print(linear_search(original, 99))  # -1
-print(binary_search(ordered, 99))  # -1
-```
-
-Both functions return a zero-based matching index or `-1`, leave inputs
-unchanged, and return `-1` for empty sequences. Test `index != -1` for a match;
-index `0` is a valid result.
-
-| Algorithm | Input | Duplicates | Time / extra space |
-| --- | --- | --- | --- |
-| Linear search | Validated integers in any order | First matching index | Best O(1), average/worst O(n); O(1) space |
-| Binary search | Validated integers sorted ascending | Any matching index | Best O(1), average/worst O(log n); O(1) space |
-
-Binary search assumes a list or tuple with constant-time indexing. It does not
-sort or scan to check ordering inside the search. Use the sorted output of
-`prepare_search_data` and validate at the pipeline boundary before searching.
-The two algorithms may return different indexes for the same value. Sorting
-cost is separate from the search complexities above.
-
-## Architecture
-
-![Planned pipeline architecture](diagrams/pipeline_architecture.png)
-
-The CLI coordinates loading, validation, the original/sorted branches, timed
-searches, and result display. Full benchmark runs also export CSV and metadata.
-Written analysis interprets the measured results. See
-[architecture and contracts](docs/architecture.md).
-
-## Screenshots
-
-The final portfolio captures are stored under [`docs/screenshots/`](docs/screenshots/):
-
-| Capture | Evidence |
-| --- | --- |
-| Linear search on 100 values | [linear_100_success.png](docs/screenshots/linear_100_success.png) |
-| Binary search on 1,000 values | [binary_1000_success.png](docs/screenshots/binary_1000_success.png) |
-| Both algorithms on 10,000 values | [both_10000_success.png](docs/screenshots/both_10000_success.png) |
-| Missing target and main menu | [missing_target.png](docs/screenshots/missing_target.png), [main_menu.png](docs/screenshots/main_menu.png) |
-| Final benchmark results | [final_benchmark_results.png](docs/screenshots/final_benchmark_results.png) |
-
-## Repository structure
-
-```text
-searchflow-analytics/
-|-- main.py                  # Interactive menu and batch command routing
-|-- requirements.txt         # Runtime dependencies
-|-- .gitignore
-|-- src/
-|   |-- __init__.py
-|   |-- data_generator.py
-|   |-- data_loader.py
-|   |-- data_processor.py
-|   |-- linear_search.py
-|   |-- binary_search.py
-|   |-- performance_timer.py
-|   |-- results_manager.py
-|   |-- benchmark.py
-|   `-- cli.py
-|-- data/                   # README and generated 100/1,000/10,000-value CSV files
-|-- results/                # Measured benchmark CSV and run metadata
-|-- tests/
-|   |-- test_data_pipeline.py
-|   |-- test_linear_search.py
-|   |-- test_binary_search.py
-|   |-- test_performance_timer.py
-|   |-- test_results_manager.py
-|   |-- test_benchmark.py
-|   `-- test_cli.py
-|-- docs/
-|   |-- requirements.md
-|   |-- architecture.md
-|   |-- day_1_checklist.md
-|   |-- day_2_checklist.md
-|   |-- day_3_checklist.md
-|   |-- day_4_checklist.md
-|   |-- day_5_checklist.md
-|   |-- day_6_checklist.md
-|   |-- big_o_analysis.md
-|   |-- recommendation_guide.md
-|   |-- benchmark_methodology.md
-|   `-- day_7_checklist.md
-|   `-- screenshots/         # Final application and benchmark captures
-`-- diagrams/
-    |-- render_architecture.py
-    `-- pipeline_architecture.png
-```
-
-Future module names and responsibilities are recorded in the architecture
-document. Empty output directories are retained with `.gitkeep` files.
-
-## Validation
-
-Run the data pipeline and search tests from the repository root:
+Run the full test suite:
 
 ```powershell
 .\.venv\Scripts\python.exe -m unittest discover -s tests -v
 ```
 
-All 73 tests pass. Coverage includes data preparation, search correctness,
-binary-search work bounds, timing arithmetic and boundaries, CSV validation,
-benchmark metadata, all required sizes, and interactive input/recovery/exit
-behavior. The menu is also checked through a real piped terminal session from
-the parent directory, with dataset/result files unchanged. Controlled
-clocks are used only in timer unit tests; published benchmark values come from
-actual calls to `time.perf_counter()`. Day 7 additionally reran the complete
-24-row benchmark in a temporary output directory and verified every row and
-its CSV hash without replacing the dated published benchmark evidence.
+The final suite contains 73 passing tests. The timer uses seven batches of 100
+searches, three warm-ups, and the median batch mean by default. Loading,
+validation, sorting, and output are excluded from search-only timing.
 
-## Delivery plan
+## Complexity and findings
 
-| Day | Deliverable |
+| Algorithm | Input | Best | Average / worst | Extra search space |
+| --- | --- | --- | --- | --- |
+| Linear search | Any valid order | O(1) | O(n) / O(n) | O(1) |
+| Binary search | Ascending sorted data | O(1) | O(log n) / O(log n) | O(1) |
+
+The saved benchmark shows linear search winning an immediate first-element
+match, while binary search is much faster for missing targets as the dataset
+grows. Sorting costs O(n log n) worst-case and uses O(n) space for a copy, so
+binary search is not automatically best for one lookup. Read the full
+[Big O analysis](docs/big_o_analysis.md) and
+[recommendation guide](docs/recommendation_guide.md).
+
+## Screenshots
+
+The final evidence captures are in [docs/screenshots](docs/screenshots/):
+
+| Capture | File |
 | --- | --- |
-| 1 — complete | Environment, requirements, structure, architecture |
-| 2 — complete | Dataset generation, loading, validation, sorted copies |
-| 3 — complete | Linear and binary search |
-| 4 — complete | Timing and benchmark CSV |
-| 5 — complete | Interactive CLI and integration |
-| 6 — complete | Test coverage audit, Big O analysis, recommendation guide |
-| 7 — complete | Final validation, screenshots, README, `v1.0.0` release |
+| Linear search on 100 values | [linear_100_success.png](docs/screenshots/linear_100_success.png) |
+| Binary search on 1,000 values | [binary_1000_success.png](docs/screenshots/binary_1000_success.png) |
+| Both algorithms on 10,000 values | [both_10000_success.png](docs/screenshots/both_10000_success.png) |
+| Missing target and main menu | [missing_target.png](docs/screenshots/missing_target.png), [main_menu.png](docs/screenshots/main_menu.png) |
+| Final benchmark table | [final_benchmark_results.png](docs/screenshots/final_benchmark_results.png) |
 
-See [Version 1 requirements](docs/requirements.md) and the
-[Day 7 quality gate](docs/day_7_checklist.md). The
-[Day 1](docs/day_1_checklist.md), [Day 2](docs/day_2_checklist.md),
-[Day 3](docs/day_3_checklist.md), [Day 4](docs/day_4_checklist.md), and
-[Day 5](docs/day_5_checklist.md) quality gates
-are retained as historical records.
-This version stays local:
-cloud deployment, databases, APIs, containers, orchestration, CI/CD,
-authentication, web dashboards, distributed processing, and advanced search
-algorithms are outside its scope.
+## Documentation map
+
+Start with the document that matches your purpose:
+
+- [Project documentation](docs/project_documentation.md) — detailed purpose,
+  architecture, data contracts, module responsibilities, algorithm contracts,
+  benchmark design, and quality evidence.
+- [Run instructions](docs/run_instructions.md) — environment setup, menu use,
+  preview/generation, benchmark commands, tests, and troubleshooting.
+- [Final project report](docs/project_report.md) — portfolio-ready summary of
+  the problem, implementation, findings, recommendations, and limitations.
+- [Combined seven-day history](docs/combined_days.md) — one readable record of
+  the complete Day 1–7 implementation journey.
+- [Requirements](docs/requirements.md) — functional and nonfunctional scope.
+- [Architecture](docs/architecture.md) — pipeline diagram and module contracts.
+- [Benchmark methodology](docs/benchmark_methodology.md) — timing boundaries,
+  target cases, raw-sample interpretation, and reproducibility.
+- [Day 7 checklist](docs/day_7_checklist.md) — final validation, screenshots,
+  and release evidence.
+- [Release notes](docs/release_notes.md) — Version 1 included scope and limits.
+
+The original [Day 1](docs/day_1_checklist.md), [Day 2](docs/day_2_checklist.md),
+[Day 3](docs/day_3_checklist.md), [Day 4](docs/day_4_checklist.md),
+[Day 5](docs/day_5_checklist.md), and [Day 6](docs/day_6_checklist.md)
+checklists remain available as detailed historical records.
+
+## Repository structure
+
+```text
+searchflow-analytics/
+|-- main.py
+|-- src/                    # Pipeline, algorithms, timing, benchmark, CLI
+|-- data/                   # Reproducible input CSV files
+|-- results/                # Benchmark CSV and metadata
+|-- tests/                  # 73 unittest cases
+|-- docs/                   # Guides, report, history, analysis, screenshots
+`-- diagrams/               # Pipeline architecture image and source
+```
+
+## Scope
+
+Version 1 is intentionally local and standard-library based. Cloud deployment,
+databases, APIs, dashboards, authentication, containers, CI/CD, distributed
+processing, and advanced search algorithms are outside this release.
