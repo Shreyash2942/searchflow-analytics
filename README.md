@@ -129,6 +129,10 @@ Start with the document that matches your purpose:
   preview/generation, benchmark commands, tests, and troubleshooting.
 - [Final project report](docs/project_report.md) — portfolio-ready summary of
   the problem, implementation, findings, recommendations, and limitations.
+- [APA 7 project report](docs/APA_SearchFlow_Analytics_Report.docx) — formatted
+  Word report with title page, abstract, citations, references, tables, and appendix.
+- [APA report source](docs/apa_project_report.md) — editable Markdown source for
+  the Word document.
 - [Combined seven-day history](docs/combined_days.md) — one readable record of
   the complete Day 1–7 implementation journey.
 - [Requirements](docs/requirements.md) — functional and nonfunctional scope.

@@ -28,6 +28,16 @@ python3 -m venv .venv
 The requirements file documents the standard-library runtime policy, so the
 install step does not add application dependencies.
 
+To regenerate the APA Word report, install the optional documentation package
+and run the builder with that interpreter:
+
+```powershell
+python -m pip install python-docx
+python docs/build_apa_report.py
+```
+
+The application itself does not require `python-docx`.
+
 ## Start the interactive application
 
 Windows:
@@ -131,6 +141,8 @@ pass/fail summary is needed:
 
 - [Project documentation](project_documentation.md) explains architecture and contracts.
 - [Project report](project_report.md) summarizes the problem, method, findings, and limits.
+- [APA 7 project report](APA_SearchFlow_Analytics_Report.docx) is the submission-ready Word document.
+- [APA report source](apa_project_report.md) is the editable report text.
 - [Combined development history](combined_days.md) consolidates the seven daily milestones.
 - [Big O analysis](big_o_analysis.md) explains complexity and measured trends.
 - [Recommendation guide](recommendation_guide.md) explains when each algorithm fits.

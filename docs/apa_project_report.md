@@ -1,9 +1,12 @@
 # SearchFlow Analytics: A Measured Comparison of Linear and Binary Search
 
-**Shreyash2942**  
-CSU Global  
-CSC506 Design and Analysis of Algorithms  
-Module 2 Portfolio Milestone  
+**Shreyash2942**
+
+CSU Global
+
+CSC506 Design and Analysis of Algorithms
+
+Module 2 Portfolio Milestone
 September 27, 2026
 
 ## Abstract
@@ -120,7 +123,7 @@ values are rounded to three decimals for presentation; the CSV preserves full
 floating-point precision. “First target” means the first value in original
 order. Preparation and output are excluded from these search-only values.
 
-**Table 1**  
+**Table 1**
 *Selected search times by dataset size*
 
 | Dataset size | First target: linear | First target: binary | Missing: linear | Missing: binary |
