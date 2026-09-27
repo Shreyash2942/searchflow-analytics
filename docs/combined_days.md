@@ -111,7 +111,7 @@ The annotated `v1.0.0` tag points to the published release commit, and GitHub
 Evidence: this consolidated Day 7 record,
 [final submission checklist](final_submission_checklist.md),
 [project report](project_report.md), [release notes](release_notes.md),
-[APA 7 report](APA_SearchFlow_Analytics_Report.docx), and [screenshots](screenshots/).
+[APA 7 report](APA_SearchFlow_Analytics_Report_Revised.docx), and [screenshots](screenshots/).
 
 ## Final state
 

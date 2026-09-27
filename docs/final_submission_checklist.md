@@ -20,8 +20,8 @@ the submission repository.
 | Big O analysis | `docs/big_o_analysis.md` | Complete |
 | Algorithm recommendations | `docs/recommendation_guide.md` | Complete |
 | Architecture and pipeline explanation | `docs/architecture.md`, `diagrams/pipeline_architecture.png` | Complete |
-| Portfolio report | `docs/APA_SearchFlow_Analytics_Report.docx` | Complete |
-| Final documentation and history | `README.md`, project documentation, report, combined history | Complete |
+| Portfolio report | `docs/APA_SearchFlow_Analytics_Report_Revised.docx` | Complete |
+| Final documentation and history | `README.md`, user guide, project documentation, report, combined history | Complete |
 | Screenshots | `docs/screenshots/` | Complete |
 | Version 1 release | Annotated `v1.0.0` tag and GitHub `main` | Complete |
 
@@ -46,8 +46,9 @@ hash matched metadata. The published benchmark files were preserved.
 ## Submission package
 
 - [README](../README.md) — project landing page and navigation.
-- [APA 7 report](APA_SearchFlow_Analytics_Report.docx) — submission document.
+- [APA 7 report](APA_SearchFlow_Analytics_Report_Revised.docx) — submission document.
 - [Project documentation](project_documentation.md) — technical details.
+- [User and operating guide](guide.md) — setup, commands, usage, and troubleshooting.
 - [Project report](project_report.md) — concise portfolio report.
 - [Combined development history](combined_days.md) — Day 1–7 record.
 - [Screenshots](screenshots/) — application and benchmark evidence.

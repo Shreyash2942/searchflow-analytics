@@ -126,9 +126,11 @@ Start with the document that matches your purpose:
 - [Project documentation](docs/project_documentation.md) — detailed purpose,
   architecture, data contracts, module responsibilities, algorithm contracts,
   benchmark design, and quality evidence.
+- [User and operating guide](docs/guide.md) — setup, commands, interactive use,
+  benchmark operation, outputs, troubleshooting, and reproducibility.
 - [Final project report](docs/project_report.md) — portfolio-ready summary of
   the problem, implementation, findings, recommendations, and limitations.
-- [APA 7 project report](docs/APA_SearchFlow_Analytics_Report.docx) — formatted
+- [APA 7 project report](docs/APA_SearchFlow_Analytics_Report_Revised.docx) — formatted
   Word report with title page, abstract, citations, references, tables, and appendix.
 - [Combined seven-day history](docs/combined_days.md) — one readable record of
   the complete Day 1–7 implementation journey.
