@@ -120,5 +120,5 @@ the simpler linear approach when ordering and preparation costs dominate.
 
 Supporting files: [benchmark methodology](benchmark_methodology.md),
 [Big O analysis](big_o_analysis.md), [recommendation guide](recommendation_guide.md),
-[run instructions](run_instructions.md), and
-[release notes](release_notes.md).
+[release notes](release_notes.md), and the final
+[APA 7 report](APA_SearchFlow_Analytics_Report.docx).

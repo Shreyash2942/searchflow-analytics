@@ -218,7 +218,7 @@ The release contains the following evidence artifacts:
 - `tests/` — 73 automated tests.
 - `docs/screenshots/` — six CLI and benchmark captures.
 - `diagrams/pipeline_architecture.png` — pipeline architecture diagram.
-- `docs/run_instructions.md` — reproducible setup and operating commands.
+- `README.md` — setup, operating commands, and project navigation.
 
 The complete implementation and documentation are available in the
 [SearchFlow Analytics GitHub repository](https://github.com/Shreyash2942/searchflow-analytics).

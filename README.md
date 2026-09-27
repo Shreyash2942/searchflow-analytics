@@ -67,7 +67,8 @@ dataset `1`, target `83810`, and mode `3`. The linear result uses original-order
 index `0`; the binary result uses an index in the sorted copy.
 
 For macOS/Linux, replace `.\.venv\Scripts\python.exe` with `.venv/bin/python`.
-The full operating guide is [docs/run_instructions.md](docs/run_instructions.md).
+The full architecture and operating context is in
+[project documentation](docs/project_documentation.md).
 
 ## Benchmark and tests
 
@@ -125,14 +126,10 @@ Start with the document that matches your purpose:
 - [Project documentation](docs/project_documentation.md) — detailed purpose,
   architecture, data contracts, module responsibilities, algorithm contracts,
   benchmark design, and quality evidence.
-- [Run instructions](docs/run_instructions.md) — environment setup, menu use,
-  preview/generation, benchmark commands, tests, and troubleshooting.
 - [Final project report](docs/project_report.md) — portfolio-ready summary of
   the problem, implementation, findings, recommendations, and limitations.
 - [APA 7 project report](docs/APA_SearchFlow_Analytics_Report.docx) — formatted
   Word report with title page, abstract, citations, references, tables, and appendix.
-- [APA report source](docs/apa_project_report.md) — editable Markdown source for
-  the Word document.
 - [Combined seven-day history](docs/combined_days.md) — one readable record of
   the complete Day 1–7 implementation journey.
 - [Requirements](docs/requirements.md) — functional and nonfunctional scope.

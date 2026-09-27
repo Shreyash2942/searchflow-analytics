@@ -108,8 +108,8 @@ The annotated `v1.0.0` tag points to the published release commit, and GitHub
 `main` matches it at the time of release.
 
 Evidence: [Day 7 checklist](day_7_checklist.md),
-[project report](project_report.md), [run instructions](run_instructions.md),
-[release notes](release_notes.md), and [screenshots](screenshots/).
+[project report](project_report.md), [release notes](release_notes.md),
+[APA 7 report](APA_SearchFlow_Analytics_Report.docx), and [screenshots](screenshots/).
 
 ## Final state
 
